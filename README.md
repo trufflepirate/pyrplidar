@@ -50,3 +50,6 @@ lidar.disconnect()
 
 ## Documentation
 This library implement full specifications on the [protocol documentation](http://bucket.download.slamtec.com/ccb3c2fc1e66bb00bd4370e208b670217c8b55fa/LR001_SLAMTEC_rplidar_protocol_v2.1_en.pdf) of Slamtec.
+
+## Credits and Acknowledgments
+This repository is forked from https://github.com/Hyun-je/pyrplidar.git. All credit to the original author for the Python implementation of SLAMTEC RPLIDAR protocol.
