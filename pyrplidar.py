@@ -18,14 +18,14 @@ class PyRPlidar:
     def connect(self, port="/dev/ttyUSB0", baudrate=115200, timeout=3):
         self.lidar_serial = PyRPlidarSerial()
         self.lidar_serial.open(port, baudrate, timeout)
-        print("PyRPlidar Info : device is connected")
+        # print("PyRPlidar Info : device is connected")
 
 
     def disconnect(self):
         if self.lidar_serial is not None:
             self.lidar_serial.close()
             self.lidar_serial = None
-            print("PyRPlidar Info : device is disconnected")
+            # print("PyRPlidar Info : device is disconnected")
 
 
 
@@ -113,7 +113,7 @@ class PyRPlidar:
                             self.get_lidar_conf(struct.pack("<IH", RPLIDAR_CONF_SCAN_MODE_MAX_DISTANCE, mode)),
                             self.get_lidar_conf(struct.pack("<IH", RPLIDAR_CONF_SCAN_MODE_US_PER_SAMPLE, mode)),
                             self.get_lidar_conf(struct.pack("<IH", RPLIDAR_CONF_SCAN_MODE_ANS_TYPE, mode)))
-            print(scan_mode)
+            # print(scan_mode)
             scan_modes.append(scan_mode)
         
         return scan_modes
