@@ -123,6 +123,16 @@ class PyRPlidarResponse:
             "data_type" : hex(self.data_type)
         }
         return str(data)
+    
+    def __dict__(self):
+        data = {
+            "sync_byte1" : hex(self.sync_byte1),
+            "sync_byte2" : hex(self.sync_byte2),
+            "data_length" : self.data_length,
+            "send_mode" : self.send_mode,
+            "data_type" : hex(self.data_type)
+        }
+        return data
 
 
 
@@ -148,6 +158,16 @@ class PyRPlidarDeviceInfo:
             "serialnumber" : self.serialnumber
         }
         return str(data)
+    
+    def __dict__(self): 
+        data = {
+            "model" : self.model,
+            "firmware_minor" : self.firmware_minor,
+            "firmware_major" : self.firmware_major,
+            "hardware" : self.hardware,
+            "serialnumber" : self.serialnumber
+        }
+        return data
 
 
 class PyRPlidarHealth:
@@ -162,6 +182,13 @@ class PyRPlidarHealth:
             "error_code" : self.error_code
         }
         return str(data)
+    
+    def __dict__(self):
+        data = {
+            "status" : self.status,
+            "error_code" : self.error_code
+        }
+        return data
 
 
 class PyRPlidarSamplerate:
@@ -176,6 +203,13 @@ class PyRPlidarSamplerate:
             "t_express" : self.t_express
         }
         return str(data)
+    
+    def __dict__(self):
+        data = {
+            "t_standard" : self.t_standard,
+            "t_express" : self.t_express
+        }
+        return data
 
 
 class PyRPlidarScanMode:
@@ -194,6 +228,15 @@ class PyRPlidarScanMode:
             "ans_type" : RPLIDAR_ANS_TYPE[self.ans_type]
         }
         return str(data)
+    
+    def __dict__(self):
+        data = {
+            "name" : self.name,
+            "max_distance" : self.max_distance,
+            "us_per_sample" : self.us_per_sample,
+            "ans_type" : RPLIDAR_ANS_TYPE[self.ans_type]
+        }
+        return data
 
 
 
@@ -224,6 +267,15 @@ class PyRPlidarMeasurement:
             "distance" : self.distance
         }
         return str(data)
+    
+    def __dict__(self):
+        data = {
+            "start_flag" : self.start_flag,
+            "quality" : self.quality,
+            "angle" : self.angle,
+            "distance" : self.distance
+        }
+        return data
 
 
 class PyRPlidarMeasurementHQ:
@@ -239,6 +291,24 @@ class PyRPlidarMeasurementHQ:
     
     def get_distance(self):
         return self.dist_mm_q2 / 4.0
+    
+    def __str__(self):
+        data = {
+            "start_flag" : self.start_flag,
+            "quality" : self.quality,
+            "angle_z_q14" : self.angle_z_q14,
+            "dist_mm_q2" : self.dist_mm_q2
+        }
+        return str(data)
+    
+    def __dict__(self):
+        data = {
+            "start_flag" : self.start_flag,
+            "quality" : self.quality,
+            "angle_z_q14" : self.angle_z_q14,
+            "dist_mm_q2" : self.dist_mm_q2
+        }
+        return data
 
 
 
@@ -250,6 +320,24 @@ class PyRPlidarCabin:
         self.distance2 = (raw_bytes[2] >> 2) + (raw_bytes[3] << 6)
         self.d_theta1 = (raw_bytes[4] & 0x0F) + ((raw_bytes[0] & 0x03) << 4)
         self.d_theta2 = (raw_bytes[4] >> 4) + ((raw_bytes[2] & 0x03) << 4)
+
+    def __str__(self):
+        data = {
+            "distance1" : self.distance1,
+            "distance2" : self.distance2,
+            "d_theta1" : self.d_theta1,
+            "d_theta2" : self.d_theta2
+        }
+        return str(data)
+    
+    def __dict__(self):
+        data = {
+            "distance1" : self.distance1,
+            "distance2" : self.distance2,
+            "d_theta1" : self.d_theta1,
+            "d_theta2" : self.d_theta2
+        }
+        return data
 
 class PyRPlidarScanCapsule:
     
@@ -320,6 +408,18 @@ class PyRPlidarDenseCabin:
     
     def __init__(self, raw_bytes):
         self.distance = (raw_bytes[0] << 8) + raw_bytes[1]
+
+    def __str__(self):
+        data = {
+            "distance" : self.distance
+        }
+        return str(data)
+    
+    def __dict__(self):
+        data = {
+            "distance" : self.distance
+        }
+        return data
 
 
 class PyRPlidarScanDenseCapsule:
@@ -392,6 +492,14 @@ class PyRPlidarUltraCabin:
             "predict2" : hex(self.predict2),
         }
         return str(data)
+    
+    def __dict__(self):
+        data = {
+            "major" : hex(self.major),
+            "predict1" : hex(self.predict1),
+            "predict2" : hex(self.predict2),
+        }
+        return data
 
 class PyRPlidarScanUltraCapsule:
 
