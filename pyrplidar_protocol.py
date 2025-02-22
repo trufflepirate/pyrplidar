@@ -215,10 +215,19 @@ class PyRPlidarSamplerate:
 class PyRPlidarScanMode:
 
     def __init__(self, data_name, data_max_distance, data_us_per_sample, data_ans_type):
-        self.us_per_sample = struct.unpack("<I", data_us_per_sample[4:8])[0]
-        self.max_distance = struct.unpack("<I", data_max_distance[4:8])[0]
+        # Convert the data to the correct format
+        # data_max_distance and data_us_per_sample are in Q8 fixed point format
+        temp_us_per_sample = struct.unpack("<I", data_us_per_sample[4:8])[0]
+        self.us_per_sample = temp_us_per_sample / (1 << 8)
+
+        temp_max_distance = struct.unpack("<I", data_max_distance[4:8])[0]
+        self.max_distance = temp_max_distance / (1 << 8)
+
+        # self.us_per_sample = struct.unpack("<I", data_us_per_sample[4:8])[0]
+        # self.max_distance = struct.unpack("<I", data_max_distance[4:8])[0]
         self.ans_type = struct.unpack("<B", data_ans_type[4:5])[0]
         self.name = codecs.decode(data_name[4:-1], 'ascii')
+
     
     def __str__(self):
         data = {
